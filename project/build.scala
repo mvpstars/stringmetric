@@ -2,6 +2,8 @@ import sbt._
 import Keys._
 
 object CoreBuild extends Build {
+	val keyFile: File = file(Path.userHome.absolutePath + "/.ssh/id_rsa")
+
 	lazy val root = Project("stringmetric", file("."),
 		settings = Defaults.defaultSettings ++ Seq(
 			//credentials += Credentials(Path.userHome / ".ivy2" / ".credentials"),
@@ -27,7 +29,7 @@ object CoreBuild extends Build {
 						</developer>
 					</developers>,
 			publishMavenStyle := true,
-			publishTo := Some("Sonatype" at "https://oss.sonatype.org/service/local/staging/deploy/maven2"),
+			publishTo := Some(Resolver.sftp("repo-mvpstars", "repo.mvp-stars.com") as ("repo", keyFile)),
 			resolvers ++= Seq(DefaultMavenRepository),
 			scalaVersion := "2.12.3",
 			crossScalaVersions := Seq("2.12.3", "2.11.11", "2.10.6"),

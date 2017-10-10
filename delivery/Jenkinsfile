@@ -1,0 +1,6 @@
+sbtLibrary {
+  slackDomain = 'mvp-stars'
+  slackChannel = '#toolbox'
+  slackToken = 'slack-mvpstars-toolbox'
+}
+

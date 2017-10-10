@@ -1,0 +1,15 @@
+#!/bin/bash
+
+tag=`git tag -l --contains HEAD | tail -1`
+version=`git describe | cut -d'-' -f1`
+
+if [ "$tag" ]
+then
+  echo Building release $tag
+else
+  snapshotNum=`git describe | cut -d'-' -f2`
+  echo Building snapshot $version-$snapshotNum
+fi
+
+./sbt clean coverage test coverageReport && ./sbt coverageAggregate publishLocal
+
