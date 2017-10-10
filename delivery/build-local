@@ -11,5 +11,5 @@ else
   echo Building snapshot $version-$snapshotNum
 fi
 
-./sbt clean coverage test coverageReport && ./sbt coverageAggregate publishLocal
+./sbt clean test publishLocal
 
